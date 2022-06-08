@@ -91,7 +91,6 @@ export class AuthService {
   }
 
 
-
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
     return this.afAuth

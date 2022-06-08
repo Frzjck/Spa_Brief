@@ -26,12 +26,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // ****** Table ******
-import { TableFilterPipe } from './shared/pipes/table-filter.pipe';
 import { TableComponent } from './components/products/table/table.component';
 import { DateformatPipe } from './shared/pipes/dateformat.pipe';
 
 // ****** Components ******
-import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -46,8 +44,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NavbarComponent,
     TableComponent,
     DateformatPipe,
-    SpinnerComponent,
-    TableFilterPipe,
   ],
   imports: [
     BrowserModule,
