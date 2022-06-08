@@ -16,20 +16,20 @@
           <mat-icon>image</mat-icon>
         </th>
         <td mat-cell *matCellDef="let element" class="center-txt">
-          <img class="product-icon" [src]="element.images[0].src" />
+          <img class="product-icon" [src]="element.images[0]?.src" />
         </td>
       </ng-container>
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
       </ng-container>
 
       <!-- Price Column -->
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef>Precio</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.price | currency: "EUR":true }}
+          {{ element?.price | currency: "EUR":true }}
         </td>
       </ng-container>
 
@@ -37,7 +37,7 @@
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef>Category</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.categories[0].name }}
+          {{ element?.categories[0]?.name }}
         </td>
       </ng-container>
 
@@ -46,7 +46,7 @@
         <th mat-header-cell *matHeaderCellDef>Stock</th>
         <td mat-cell *matCellDef="let element">
           {{
-            element.atum_stock_status === "instock"
+            element?.atum_stock_status === "instock"
               ? "Hay existencias"
               : "Sin stock"
           }}
@@ -57,7 +57,7 @@
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Fecha</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.date_created | dateformat }}
+          {{ element?.date_created | dateformat }}
         </td>
       </ng-container>
 

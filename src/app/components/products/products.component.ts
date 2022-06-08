@@ -12,6 +12,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class ProductsComponent implements OnInit {
   productSub: Subscription;
   dataSource: any;
+
   urlDefault = 'https://atum.betademo.es/';
   defaultClientKey = 'ck_5e6d288b572c2b6c5e324940e7ec2be58b7a64f4';
   defaultSecretKey = 'cs_15f29b5e857247ca9103e98390269d5140ea6a55';

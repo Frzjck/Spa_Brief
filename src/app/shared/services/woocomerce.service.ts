@@ -8,8 +8,6 @@ import { catchError, Subject } from 'rxjs';
 })
 export class WoocomerceService {
   url = 'https://atum.betademo.es/';
-  CLIENT_KEY = environment.woocomerce.clientKey;
-  SECRET_KEY = environment.woocomerce.secretKey;
   private productObs = new Subject();
 
   constructor(private http: HttpClient) {}
