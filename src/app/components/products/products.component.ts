@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WoocomerceService } from '../../shared/services/woocomerce.service';
 import { catchError, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -17,9 +18,13 @@ export class ProductsComponent implements OnInit {
 
   currentUrl = this.urlDefault;
   apiError = false;
-  constructor(private woocom: WoocomerceService) {}
+  constructor(
+    private woocom: WoocomerceService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.authService.getUser();
     this.woocom.getProducts(
       this.urlDefault,
       this.defaultClientKey,
