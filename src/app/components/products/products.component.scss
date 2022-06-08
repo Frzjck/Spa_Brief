@@ -1,0 +1,39 @@
+.content {
+  width: 100vw;
+  margin-top: 1rem;
+  display: grid;
+  place-items: center;
+
+}
+
+
+.wooCommerceApi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+
+  mat-form-field {
+    margin: 1rem;
+  }
+
+  .key-input {
+    width: 23rem;
+  }
+
+  .url-input {
+    width: 15rem;
+  }
+
+  .br {
+    flex-basis: 100%;
+
+  }
+
+  .load-btn {
+    height: 2.2rem;
+    width: 7rem;
+  }
+
+}

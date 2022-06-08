@@ -1,0 +1,55 @@
+.content {
+  padding: 1rem;
+  width: 100vw;
+
+  background-color: rgb(79, 79, 192);
+
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+
+    .space {
+      flex: 1;
+    }
+
+    .username {
+      color: white;
+      align-self: flex-end;
+      margin: 0;
+    }
+
+    li {
+      list-style: none;
+      margin-right: 3rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        font-size: 1.3rem;
+
+        &.activeLink {
+          color: white;
+          background-color: rgba(206, 206, 206, 0.185);
+        }
+
+        &:hover {
+          color: white;
+          transition: .5s;
+        }
+
+        span {
+          margin: 0.5rem;
+        }
+      }
+
+      .logout {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="wooCommerceApi">
+    <mat-form-field class="url-input">
+      <input
+        matInput
+        type="text"
+        placeholder="URL"
+        [value]="urlDefault"
+        #urlInput
+      />
+    </mat-form-field>
+    <mat-form-field class="key-input">
+      <input
+        matInput
+        type="text"
+        placeholder="Client Key"
+        [value]="defaultClientKey"
+        #clientKeyInput
+      />
+    </mat-form-field>
+    <mat-form-field class="key-input">
+      <input
+        matInput
+        type="text"
+        placeholder="Secret Key"
+        [value]="defaultSecretKey"
+        #secretKeyInput
+      />
+    </mat-form-field>
+    <div class="br"></div>
+    <button
+      class="load-btn"
+      mat-raised-button
+      (click)="
+        loadNewApi(urlInput.value, clientKeyInput.value, secretKeyInput.value)
+      "
+      color="primary"
+    >
+      Load API
+    </button>
+  </div>
+  <h1 *ngIf="!apiError">Results for: {{ currentUrl }}</h1>
+  <h1 *ngIf="apiError">API not found, please check parameters</h1>
+  <app-table *ngIf="dataSource" [dataSource]="dataSource"></app-table>
+  <mat-spinner *ngIf="!dataSource && !apiError"></mat-spinner>
+</div>

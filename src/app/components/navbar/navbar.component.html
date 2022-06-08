@@ -1,0 +1,30 @@
+<div class="content">
+  <ul>
+    <p class="username" *ngIf="userName">Welcome, {{ userName }}</p>
+    <span class="space"></span>
+    <li *ngIf="this.authService.isLoggedIn">
+      <a mat-button routerLink="/" routerLinkActive="activeLink"
+        ><mat-icon> store </mat-icon><span class="nav-text">Products</span>
+      </a>
+    </li>
+    <li *ngIf="!this.authService.isLoggedIn">
+      <a mat-button routerLink="/sign-in" routerLinkActive="activeLink"
+        ><mat-icon> login </mat-icon><span class="nav-text"> Log In</span>
+      </a>
+    </li>
+    <li *ngIf="!this.authService.isLoggedIn">
+      <a mat-button routerLink="/register-user" routerLinkActive="activeLink"
+        ><mat-icon> person_add </mat-icon><span class="nav-text">Sign Up</span>
+      </a>
+    </li>
+    <li>
+      <a
+        mat-button
+        *ngIf="this.authService.isLoggedIn"
+        (click)="this.authService.SignOut()"
+        class="logout"
+        ><mat-icon> logout </mat-icon><span class="nav-text">Log Out</span>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,49 @@
+<div class="content">
+  <div class="displayTableCell">
+    <div class="authBlock">
+      <h1>Sign In</h1>
+      <div class="formGroup">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            class="formControl"
+            placeholder="Email Address"
+            #userName
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="formGroup">
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            class="formControl"
+            placeholder="Password"
+            #userPassword
+            required
+          />
+        </mat-form-field>
+      </div>
+      <!-- Calling SignIn Api from AuthService -->
+      <div class="formGroup">
+        <button
+          mat-raised-button
+          (click)="authService.SignIn(userName.value, userPassword.value)"
+          color="primary"
+        >
+          Log in
+        </button>
+      </div>
+    </div>
+    <div class="redirectToLogin">
+      <span
+        >Don't have an account?
+        <button mat-button color="primary" routerLink="/register-user">
+          Sign Up
+        </button>
+      </span>
+    </div>
+  </div>
+</div>
