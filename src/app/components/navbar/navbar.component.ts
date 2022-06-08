@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userNameSub = this.authService.userNameSub.subscribe(
       (username) => (this.userName = username)
     );
+    console.log('null', null, 12, '12');
   }
   ngOnDestroy(): void {
     this.userNameSub.unsubscribe;
