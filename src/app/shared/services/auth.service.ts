@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from '../models/user';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { getAuth, updateProfile, onAuthStateChanged } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
@@ -10,14 +10,14 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
   userNameSub = new Subject<String>;
-
+  
   auth = getAuth();
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -37,11 +37,11 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+
   }
   getUser() {
     const user = localStorage.getItem('user');
     if (user && user !== "null" ) this.userNameSub.next(JSON.parse(user!).displayName);
-      
   }
 
   // Sign in with email/password
@@ -86,9 +86,11 @@ export class AuthService {
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return (user !== null) !== false ? true : false;
+    const user = firebase.auth().currentUser;
+    return user ? true : false;
   }
+
+
 
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
