@@ -9,6 +9,8 @@
     />
   </mat-form-field>
   <div class="mat-elevation-z8">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
     <table mat-table [dataSource]="dataSource">
       <!-- Img Column -->
       <ng-container matColumnDef="image">
@@ -73,9 +75,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <div class="center">
-      <mat-spinner *ngIf="isLoading"></mat-spinner>
-    </div>
     <mat-paginator
       [length]="totProducts"
       [pageSizeOptions]="[5, 10]"

@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 // ****** Table ******
 import { TableComponent } from './components/products/table/table.component';
@@ -64,6 +65,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
