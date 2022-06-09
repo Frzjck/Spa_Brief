@@ -3,6 +3,7 @@ import { WoocomerceService } from '../../shared/services/woocomerce.service';
 import { catchError, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from '../../shared/services/auth.service';
+import { ApiConfig } from '../../shared/models/api-config';
 
 @Component({
   selector: 'app-products',
@@ -12,25 +13,21 @@ import { AuthService } from '../../shared/services/auth.service';
 export class ProductsComponent implements OnInit {
   productSub: Subscription;
   dataSource: any;
+  apiConfig: ApiConfig;
 
-  urlDefault = 'https://atum.betademo.es/';
-  defaultClientKey = 'ck_5e6d288b572c2b6c5e324940e7ec2be58b7a64f4';
-  defaultSecretKey = 'cs_15f29b5e857247ca9103e98390269d5140ea6a55';
-
-  currentUrl = this.urlDefault;
   apiError = false;
+
   constructor(
     private woocom: WoocomerceService,
     private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.apiConfig = this.woocom.getApiConfig();
     this.authService.getUser();
-    this.woocom.getProducts(
-      this.urlDefault,
-      this.defaultClientKey,
-      this.defaultSecretKey
-    );
+
+    if (this.apiConfig) this.woocom.getProducts(this.apiConfig);
+
     this.productSub = this.woocom.productListener().subscribe((data: any) => {
       if (data) {
         this.dataSource = new MatTableDataSource(data);
@@ -39,10 +36,17 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+
   loadNewApi(url: string, clientKey: string, secretKey: string) {
+    const newApiconfig: ApiConfig = {
+      url,
+      clientKey,
+      secretKey,
+    };
+    this.apiConfig = newApiconfig;
+    this.woocom.saveApiConfig(newApiconfig);
     this.apiError = false;
     this.dataSource = undefined;
-    this.woocom.getProducts(url, clientKey, secretKey);
-    this.currentUrl = url;
+    this.woocom.getProducts(this.apiConfig);
   }
 }

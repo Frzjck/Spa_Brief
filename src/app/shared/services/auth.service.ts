@@ -11,6 +11,8 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { WoocomerceService } from '../../shared/services/woocomerce.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +25,8 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private wooService:WoocomerceService
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -105,6 +108,7 @@ export class AuthService {
         window.alert(error);
       });
   }
+
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -123,11 +127,13 @@ export class AuthService {
       merge: true,
     });
   }
+
   // Sign out
   SignOut() {
     this.userNameSub.next("");
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      this.wooService.deleteApiConfig();
       this.router.navigate(['sign-in']);
     });
   }

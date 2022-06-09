@@ -5,7 +5,7 @@
         matInput
         type="text"
         placeholder="URL"
-        [value]="urlDefault"
+        [value]="apiConfig?.url"
         #urlInput
       />
     </mat-form-field>
@@ -14,7 +14,7 @@
         matInput
         type="text"
         placeholder="Client Key"
-        [value]="defaultClientKey"
+        [value]="apiConfig?.clientKey"
         #clientKeyInput
       />
     </mat-form-field>
@@ -23,7 +23,7 @@
         matInput
         type="text"
         placeholder="Secret Key"
-        [value]="defaultSecretKey"
+        [value]="apiConfig?.secretKey"
         #secretKeyInput
       />
     </mat-form-field>
@@ -40,10 +40,12 @@
     </button>
   </div>
   <div class="results-text">
-    <h1 *ngIf="!apiError">Results for: {{ currentUrl }}</h1>
-    <h1 *ngIf="apiError">API not found, please check parameters</h1>
+    <h1 *ngIf="!apiError && apiConfig">Results for: {{ apiConfig?.url }}</h1>
+    <h1 *ngIf="apiError && apiConfig">
+      API not found, please check parameters
+    </h1>
   </div>
 
   <app-table *ngIf="dataSource" [dataSource]="dataSource"></app-table>
-  <mat-spinner *ngIf="!dataSource && !apiError"></mat-spinner>
+  <mat-spinner *ngIf="!dataSource && !apiError && apiConfig"></mat-spinner>
 </div>
