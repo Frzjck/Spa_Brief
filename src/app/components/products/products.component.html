@@ -32,7 +32,11 @@
       class="load-btn"
       mat-raised-button
       (click)="
-        loadNewApi(urlInput.value, clientKeyInput.value, secretKeyInput.value)
+        loadNewApi({
+          url: urlInput.value,
+          clientKey: clientKeyInput.value,
+          secretKey: secretKeyInput.value
+        })
       "
       color="primary"
     >
@@ -46,6 +50,6 @@
     </h1>
   </div>
 
-  <app-table *ngIf="dataSource" [dataSource]="dataSource"></app-table>
-  <mat-spinner *ngIf="!dataSource && !apiError && apiConfig"></mat-spinner>
+  <app-table *ngIf="isData" [apiConfig]="apiConfig"></app-table>
+  <mat-spinner *ngIf="!isData && !apiError && apiConfig"></mat-spinner>
 </div>

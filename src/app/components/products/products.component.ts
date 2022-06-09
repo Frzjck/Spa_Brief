@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WoocomerceService } from '../../shared/services/woocomerce.service';
-import { catchError, Subscription } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth.service';
 import { ApiConfig } from '../../shared/models/api-config';
 
@@ -12,9 +11,10 @@ import { ApiConfig } from '../../shared/models/api-config';
 })
 export class ProductsComponent implements OnInit {
   productSub: Subscription;
-  dataSource: any;
+  isData: boolean;
   apiConfig: ApiConfig;
-
+  totPages: number;
+  totProducts: number;
   apiError = false;
 
   constructor(
@@ -26,27 +26,19 @@ export class ProductsComponent implements OnInit {
     this.apiConfig = this.woocom.getApiConfig();
     this.authService.getUser();
 
-    if (this.apiConfig) this.woocom.getProducts(this.apiConfig);
+    if (this.apiConfig) this.woocom.getProducts(this.apiConfig, 1, 5);
 
     this.productSub = this.woocom.productListener().subscribe((data: any) => {
-      if (data) {
-        this.dataSource = new MatTableDataSource(data);
-      } else {
-        this.apiError = true;
-      }
+      if (data) this.isData = true;
+      else this.apiError = true;
     });
   }
 
-  loadNewApi(url: string, clientKey: string, secretKey: string) {
-    const newApiconfig: ApiConfig = {
-      url,
-      clientKey,
-      secretKey,
-    };
+  loadNewApi(newApiconfig: ApiConfig) {
+    this.apiError = false;
+    this.isData = false;
     this.apiConfig = newApiconfig;
     this.woocom.saveApiConfig(newApiconfig);
-    this.apiError = false;
-    this.dataSource = undefined;
     this.woocom.getProducts(this.apiConfig);
   }
 }
