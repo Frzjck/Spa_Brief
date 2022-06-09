@@ -34,6 +34,16 @@
   .load-btn {
     height: 2.2rem;
     width: 7rem;
+
+    &:hover {
+      opacity: 90%;
+    }
   }
 
+}
+
+.results-text {
+  h1 {
+    text-align: center;
+  }
 }

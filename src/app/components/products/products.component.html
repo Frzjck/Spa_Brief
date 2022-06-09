@@ -39,8 +39,11 @@
       Load API
     </button>
   </div>
-  <h1 *ngIf="!apiError">Results for: {{ currentUrl }}</h1>
-  <h1 *ngIf="apiError">API not found, please check parameters</h1>
+  <div class="results-text">
+    <h1 *ngIf="!apiError">Results for: {{ currentUrl }}</h1>
+    <h1 *ngIf="apiError">API not found, please check parameters</h1>
+  </div>
+
   <app-table *ngIf="dataSource" [dataSource]="dataSource"></app-table>
   <mat-spinner *ngIf="!dataSource && !apiError"></mat-spinner>
 </div>
