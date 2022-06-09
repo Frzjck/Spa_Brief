@@ -19,11 +19,13 @@
   }
 
   .key-input {
-    width: 23rem;
+    width: 22rem;
+    max-width: 90vw;
   }
 
   .url-input {
     width: 15rem;
+    max-width: 90vw;
   }
 
   .br {
@@ -45,5 +47,13 @@
 .results-text {
   h1 {
     text-align: center;
+    font-size: min(4vw, 2rem);
+
   }
 }
+
+// @media (max-width: 480px) {
+//   .wooCommerceApi {
+
+//   }
+// }
