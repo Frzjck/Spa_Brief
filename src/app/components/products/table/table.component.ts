@@ -75,8 +75,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   searchEvent(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+    this.isLoading = true;
+    this.woocom.getProducts(this.apiConfig, 1, 5, filterValue);
   }
 }

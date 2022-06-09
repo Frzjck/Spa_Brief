@@ -39,6 +39,6 @@ export class ProductsComponent implements OnInit {
     this.isData = false;
     this.apiConfig = newApiconfig;
     this.woocom.saveApiConfig(newApiconfig);
-    this.woocom.getProducts(this.apiConfig);
+    this.woocom.getProducts(this.apiConfig, 1, 5);
   }
 }

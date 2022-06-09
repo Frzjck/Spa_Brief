@@ -11,13 +11,19 @@ export class WoocomerceService {
   private productObs = new ReplaySubject(1);
   constructor(private http: HttpClient) {}
 
-  getProducts(apiConfig: ApiConfig, pageNumber?: number, perPage?: number) {
+  getProducts(
+    apiConfig: ApiConfig,
+    pageNumber: number,
+    perPage: number,
+    searchItem?: string
+  ) {
     const pageNumberParam = pageNumber ? `page=${pageNumber}&` : '';
     const perPageParam = perPage ? `per_page=${perPage}&` : '';
+    const searchItemParam = searchItem ? `search=${searchItem}&` : '';
 
     return this.http
       .get(
-        `${apiConfig.url}/wp-json/wc/v3/products?${pageNumberParam}${perPageParam}consumer_key=${apiConfig.clientKey}&consumer_secret=${apiConfig.secretKey}`,
+        `${apiConfig.url}/wp-json/wc/v3/products?${searchItemParam}${pageNumberParam}${perPageParam}consumer_key=${apiConfig.clientKey}&consumer_secret=${apiConfig.secretKey}`,
         { observe: 'response' }
       )
       .pipe(
