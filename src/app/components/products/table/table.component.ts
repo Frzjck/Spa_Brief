@@ -7,7 +7,12 @@ import {
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subscription } from 'rxjs';
+import {
+  Subscription,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+} from 'rxjs';
 import { OnDestroy } from '@angular/core';
 import { WoocomerceService } from 'src/app/shared/services/woocomerce.service';
 import { ApiConfig } from '../../../shared/models/api-config';
@@ -33,6 +38,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   apiDataSub: Subscription;
   dataSource: any;
   isLoading = false;
+  searchSubscription: Subscription;
+  searchSubject = new Subject();
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @Input() apiConfig: ApiConfig;
   constructor(private woocom: WoocomerceService) {}
@@ -43,6 +51,14 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.apiDataSub = this.woocom.productListener().subscribe((data: any) => {
       this.handleAPiResponse(data);
     });
+
+    this.searchSubscription = this.searchSubject
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((results) => {
+        this.isLoading = true;
+        if (typeof results === 'string' || results === '')
+          this.woocom.getProducts(this.apiConfig, 1, 5, results);
+      });
   }
 
   ngAfterViewInit() {
@@ -51,6 +67,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.apiDataSub.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 
   handleAPiResponse(data: any) {
@@ -75,7 +92,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   searchEvent(filterValue: string) {
-    this.isLoading = true;
-    this.woocom.getProducts(this.apiConfig, 1, 5, filterValue);
+    this.searchSubject.next(filterValue);
   }
 }
