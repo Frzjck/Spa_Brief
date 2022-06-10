@@ -15,6 +15,16 @@
   }
 }
 
+.login-btn {
+  background-color: rgb(36, 113, 255);
+  padding: 0 2rem;
+
+  &:hover {
+    opacity: 80%;
+    transition: .5s;
+  }
+}
+
 .displayTableCell {
   background-color: #eee;
   padding: 3rem 2rem 2rem 2rem;

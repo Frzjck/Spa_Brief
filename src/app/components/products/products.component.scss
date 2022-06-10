@@ -3,7 +3,6 @@
   margin-top: 1rem;
   display: grid;
   place-items: center;
-
 }
 
 
@@ -12,7 +11,10 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin: 1rem;
+  padding: 1rem 0;
+  margin-bottom: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   mat-form-field {
     margin: 1rem;
@@ -30,12 +32,12 @@
 
   .br {
     flex-basis: 100%;
-
   }
 
   .load-btn {
     height: 2.2rem;
     width: 7rem;
+    background-color: rgb(36, 113, 255);
 
     &:hover {
       opacity: 90%;
@@ -47,13 +49,9 @@
 .results-text {
   h1 {
     text-align: center;
+    font-weight: 100;
+    color: rgb(59, 59, 59);
     font-size: min(4vw, 2rem);
-
+    font-family: 'Montserrat', sans-serif;
   }
 }
-
-// @media (max-width: 480px) {
-//   .wooCommerceApi {
-
-//   }
-// }
