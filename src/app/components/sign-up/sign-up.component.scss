@@ -27,6 +27,13 @@
   }
 }
 
+.redirect-btn {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(0, 81, 255);
+  }
+}
+
 .displayTableCell {
   background-color: #eee;
   padding: 3rem 2rem 2rem 2rem;
